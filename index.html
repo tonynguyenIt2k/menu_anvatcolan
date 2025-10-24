@@ -46,6 +46,21 @@
       background: linear-gradient(180deg, rgba(15,23,42,.7), rgba(15,23,42,.5));
       border-color: rgba(51,65,85,.7);
     }
+
+    .tab.active {
+    background: rgba(240, 194, 84, 0.25);
+    color: #e6b744;
+    font-weight: 700;
+    border-color: #e6b744;
+    }
+
+     .dock-link.active {
+      color:#e6b744;           /* brand-600 */
+      font-weight:700;
+    }
+    .dock-link.active .i {
+      transform: translateY(-2px) scale(1.05);
+    }
     .pb-safe{ padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); }
     .pt-safe{ padding-top: calc(env(safe-area-inset-top, 0px) + 12px); }
     @media print {
@@ -83,13 +98,13 @@
         </div>
 
         <!-- Tabs -->
-        <nav class="no-print -mb-px hidden md:flex gap-2 text-sm font-semibold">
-          <a href="#mi-tron" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60">Mì Trộn</a>
-          <a href="#banh-trang" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Bánh tráng</a>
-          <a href="#do-uong" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Đồ uống</a>
-          <a href="#mi-them" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Mì thêm</a>
-          <a href="#combo-mi" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Combo Mì</a>
-          <a href="#combo-banhnuoc" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Combo Bánh Tráng + Nước</a>
+        <nav id="menuTabs" class="no-print -mb-px hidden md:flex gap-2 text-sm font-semibold">
+          <a href="#mi-tron"         class="tab px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60">Mì Trộn</a>
+          <a href="#banh-trang"      class="tab px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 hover:bg-white/40 dark:hover:bg-slate-900/40">Bánh tráng</a>
+          <a href="#do-uong"         class="tab px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 hover:bg-white/40 dark:hover:bg-slate-900/40">Đồ uống</a>
+          <a href="#mi-them"         class="tab px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 hover:bg-white/40 dark:hover:bg-slate-900/40">Mì thêm</a>
+          <a href="#combo-mi"        class="tab px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 hover:bg-white/40 dark:hover:bg-slate-900/40">Combo Mì</a>
+          <a href="#combo-banhnuoc"  class="tab px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 hover:bg-white/40 dark:hover:bg-slate-900/40">Combo Bánh + Nước</a>
         </nav>
       </div>
     </header>
@@ -262,24 +277,24 @@
       </section>
     </main>
 
-    <!-- Footer Dock -->
+   <!-- Footer Dock -->
     <footer class="no-print lg:hidden fixed bottom-0 inset-x-0 z-40 pb-safe px-4">
-      <div class="glass rounded-2xl h-[64px] grid grid-cols-4 items-center px-2">
-        <a href="#mi-tron" class="flex flex-col items-center text-xs font-medium">
+      <div id="dockNav" class="glass rounded-2xl h-[64px] grid grid-cols-4 items-center px-2">
+        <a href="#mi-tron" class="dock-link flex flex-col items-center text-xs font-medium">
           <span class="i">🍜</span><span>Mì trộn</span>
         </a>
-        <a href="#banh-trang" class="flex flex-col items-center text-xs font-medium">
+        <a href="#banh-trang" class="dock-link flex flex-col items-center text-xs font-medium">
           <span class="i">🍘</span><span>Bánh tráng</span>
         </a>
-        <a href="#do-uong" class="flex flex-col items-center text-xs font-medium">
+        <a href="#do-uong" class="dock-link flex flex-col items-center text-xs font-medium">
           <span class="i">🥤</span><span>Đồ uống</span>
         </a>
-        <a href="#combo-mi" class="flex flex-col items-center text-xs font-medium">
+        <a href="#combo-mi" class="dock-link flex flex-col items-center text-xs font-medium">
           <span class="i">🥢</span><span>Combo</span>
         </a>
-        
       </div>
     </footer>
+
   </div>
 
   <script>
@@ -298,6 +313,74 @@
     });
     printBtn?.addEventListener('click', () => window.print());
     toTopBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const tabLinks  = [...document.querySelectorAll('#menuTabs .tab')];       // có thể không tồn tại
+    const dockLinks = [...document.querySelectorAll('#dockNav  .dock-link')]; // mobile dock
+    const allLinks  = [...tabLinks, ...dockLinks];
+
+    // Helper: bật/tắt active theo hash cho cả tabs và dock
+    function setActiveByHash(hash){
+      allLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+    }
+
+    // Cuộn mượt có bù header sticky
+    function smoothScrollTo(hash){
+      const target = document.querySelector(hash);
+      if (!target) return;
+      const header = document.querySelector('header.sticky');
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const y = target.getBoundingClientRect().top + window.pageYOffset - (headerH + 8);
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      history.pushState(null, '', hash);
+    }
+
+    // Click trên bất kỳ link nào: active + cuộn mượt
+    allLinks.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const hash = e.currentTarget.getAttribute('href');
+        setActiveByHash(hash);
+        smoothScrollTo(hash);
+      });
+    });
+
+    // Lần đầu vào trang
+    setActiveByHash(location.hash || '#mi-tron');
+
+    // Đồng bộ khi hash đổi (back/forward)
+    window.addEventListener('hashchange', () => setActiveByHash(location.hash));
+
+    // Scrollspy cho tất cả section có trong menu/dock
+    const sectionIds = [...new Set(allLinks.map(a => a.getAttribute('href')))];
+    const sections = sectionIds.map(h => document.querySelector(h)).filter(Boolean);
+
+    // Tránh “nháy” khi đang cuộn mượt do click
+    let isProgrammaticScroll = false, t = null;
+    const origScrollTo = window.scrollTo.bind(window);
+    window.scrollTo = function(opts){
+      if (opts && typeof opts === 'object' && opts.behavior === 'smooth') {
+        isProgrammaticScroll = true;
+        clearTimeout(t);
+        t = setTimeout(() => { isProgrammaticScroll = false; }, 550);
+      }
+      return origScrollTo(opts);
+    };
+
+    const io = new IntersectionObserver(entries => {
+      if (isProgrammaticScroll) return;
+      const visible = entries.filter(en => en.isIntersecting)
+                             .sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) setActiveByHash('#' + visible[0].target.id);
+    }, {
+      root: null,
+      rootMargin: '-45% 0px -45% 0px', // vùng giữa màn hình
+      threshold: [0, .1, .25, .5, .75, 1]
+    });
+
+    sections.forEach(s => io.observe(s));
+  });
+  
   </script>
 </body>
 </html>
