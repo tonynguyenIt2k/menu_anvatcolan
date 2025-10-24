@@ -4,8 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark">
-  <title>Snack Hub — Menu</title>
+  <title>Ăn Vặt Cô Lan • Thực đơn</title>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <!--fontawesome-->
+ <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2Pkf2u+YtWZSu2Vx1Nn2lM1xZ1Zx5Wc1zZ1pV6v5+z0fQmB2IS3G2QqzYw==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -50,13 +56,13 @@
     <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-slate-950/60 border-b border-slate-200/60 dark:border-slate-800/60">
       <div class="max-w-5xl mx-auto px-4 pt-safe">
         <div class="flex items-center gap-3 py-3">
-          <div class="h-9 w-9 rounded-xl bg-brand/20 grid place-items-center text-brand">
+          <div>
             <!-- simple logo placeholder -->
-           <img src="./logo.png" alt="Ăn Vặt Cô Lan" class="h-6 w-6">
+           <img src="./logo.png" alt="Ăn Vặt Cô Lan" class="h-12 w-12 rounded-full object-cover">
           </div>
           <div class="flex-1">
-            <h1 class="text-xl font-bold tracking-tight">Ăn Vặt Cô Lan • Thực đơn</h1>
-            <p class="text-sm text-slate-500 dark:text-slate-400">Món ngon – Giá dễ chịu • In đẹp khi bấm Ctrl/Cmd+P</p>
+            <h1 class="text-xs md:text-3xl font-bold tracking-tight">Ăn Vặt Cô Lan</h1>
+            <p class="text-xs md:inline hidden text-slate-500 dark:text-slate-400">Món ngon – Giá dễ chịu • In đẹp khi bấm Ctrl/Cmd+P</p>
           </div>
           <div class="flex items-center gap-2 no-print">
             <button id="printBtn" class="inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-brand text-slate-900 font-semibold shadow hover:bg-brand-600 active:scale-95 transition">
@@ -72,7 +78,7 @@
         </div>
 
         <!-- Tabs -->
-        <nav class="no-print -mb-px flex gap-2 text-sm font-semibold">
+        <nav class="no-print -mb-px hidden md:flex gap-2 text-sm font-semibold">
           <a href="#mi-tron" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60">Mì Trộn</a>
           <a href="#banh-trang" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Bánh tráng</a>
           <a href="#mi-them" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Mì thêm</a>
@@ -89,7 +95,7 @@
           <header class="flex items-end justify-between gap-3 mb-4">
             <div>
               <h2 class="text-lg sm:text-2xl font-bold">🍜 Mì Trộn Indomie</h2>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Giá đã bao gồm topping theo từng món.</p>
+              <p class="text-s md:text-base text-slate-500 dark:text-slate-400">Giá đã bao gồm topping theo từng món.</p>
             </div>
             <span class="text-xs px-2 py-1 rounded-full bg-brand/20 text-brand font-semibold">Best Seller</span>
           </header>
@@ -239,9 +245,9 @@
         <a href="#combo-mi" class="flex flex-col items-center text-xs font-medium">
           <span class="i">🥢</span><span>Combo</span>
         </a>
-        <button id="toTop" class="flex flex-col items-center text-xs font-medium">
-          <span class="i">⬆️</span><span>Lên đầu</span>
-        </button>
+        <a href="#mi-them" class="flex flex-col items-center text-xs font-medium">
+          <span class="i">🍜</span><span>Mì thêm</span>
+        </a>
       </div>
     </footer>
   </div>
