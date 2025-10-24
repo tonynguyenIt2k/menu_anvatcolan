@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <title>Ăn Vặt Cô Lan • Thực đơn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <!--fontawesome-->
+ <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2Pkf2u+YtWZSu2Vx1Nn2lM1xZ1Zx5Wc1zZ1pV6v5+z0fQmB2IS3G2QqzYw==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Be Vietnam Pro", "system-ui", "sans-serif"] },
+          colors: {
+            brand: { DEFAULT: "#f0c254", 600:"#e6b744", 700:"#d8a834" },
+          },
+          boxShadow: {
+            glass: "0 10px 25px rgba(2,6,23,.12), inset 0 1px rgba(255,255,255,.25)",
+          }
+        }
+      },
+      darkMode: "class"
+    }
+  </script>
+  <style>
+    :root { --radius: 18px }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.5));
+      backdrop-filter: blur(10px);
+      box-shadow: var(--tw-shadow, 0 0 #0000), 0 10px 25px rgba(2,6,23,.1);
+      border: 1px solid rgba(148,163,184,.35);
+    }
+    .dark .glass {
+      background: linear-gradient(180deg, rgba(15,23,42,.7), rgba(15,23,42,.5));
+      border-color: rgba(51,65,85,.7);
+    }
+    .pb-safe{ padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); }
+    .pt-safe{ padding-top: calc(env(safe-area-inset-top, 0px) + 12px); }
+    @media print {
+      .no-print{ display:none !important }
+      body{ background:white }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
+  <!-- Page -->
+  <div id="app" class="min-h-dvh">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-slate-950/60 border-b border-slate-200/60 dark:border-slate-800/60">
+      <div class="max-w-5xl mx-auto px-4 pt-safe">
+        <div class="flex items-center gap-3 py-3">
+          <div>
+            <!-- simple logo placeholder -->
+           <img src="./logo.png" alt="Ăn Vặt Cô Lan" class="h-12 w-12 rounded-full object-cover">
+          </div>
+          <div class="flex-1">
+            <h1 class="text-xs md:text-3xl font-bold tracking-tight">Ăn Vặt Cô Lan</h1>
+            <p class="text-xs md:inline hidden text-slate-500 dark:text-slate-400">Món ngon – Giá dễ chịu • In đẹp khi bấm Ctrl/Cmd+P</p>
+          </div>
+          <div class="flex items-center gap-2 no-print">
+            <button id="printBtn" class="inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-brand text-slate-900 font-semibold shadow hover:bg-brand-600 active:scale-95 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 9V2h12v7H6zm12 2h2a2 2 0 012 2v6h-6v-4H8v4H2v-6a2 2 0 012-2h2V7h12v4z"/></svg>
+              In menu
+            </button>
+            <button id="themeBtn" class="inline-flex items-center gap-2 rounded-xl px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/60 hover:bg-white/90 dark:hover:bg-slate-900/80 active:scale-95 transition">
+              <span class="sr-only">Đổi giao diện</span>
+              <svg id="sun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v2m0 14v2m7-9h2M3 12H1m15.364 6.364 1.414 1.414M6.222 6.222 4.808 4.808m12.728 0 1.414 1.414M6.222 17.778l-1.414 1.414"/><circle cx="12" cy="12" r="4"/></svg>
+              <svg id="moon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <nav class="no-print -mb-px hidden md:flex gap-2 text-sm font-semibold">
+          <a href="#mi-tron" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60">Mì Trộn</a>
+          <a href="#banh-trang" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Bánh tráng</a>
+          <a href="#mi-them" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Mì thêm</a>
+          <a href="#combo-mi" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Combo Mì</a>
+          <a href="#combo-banhnuoc" class="px-3 py-2 rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 bg-white/0 hover:bg-white/40 dark:hover:bg-slate-900/40">Combo Bánh + Nước</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 pb-safe pt-6 sm:pt-10 space-y-8">
+      <!-- Section: Mì Trộn -->
+      <section id="mi-tron" class="space-y-3">
+        <div class="glass rounded-2xl p-4 sm:p-6">
+          <header class="flex items-end justify-between gap-3 mb-4">
+            <div>
+              <h2 class="text-lg sm:text-2xl font-bold">🍜 Mì Trộn Indomie</h2>
+              <p class="text-s md:text-base text-slate-500 dark:text-slate-400">Giá đã bao gồm topping theo từng món.</p>
+            </div>
+            <span class="text-xs px-2 py-1 rounded-full bg-brand/20 text-brand font-semibold">Best Seller</span>
+          </header>
+          <div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-100/80 dark:bg-slate-900/60">
+                <tr>
+                  <th class="text-left px-4 py-3">Tên món</th>
+                  <th class="text-right px-4 py-3">Giá</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200/80 dark:divide-slate-800/80">
+                <tr><td class="px-4 py-3">Mì Trộn Thập Cẩm Nhiều Mì</td><td class="px-4 py-3 text-right font-semibold">38.500đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Full Topping Nhiều Mì</td><td class="px-4 py-3 text-right font-semibold">56.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Full Topping</td><td class="px-4 py-3 text-right font-semibold">48.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Xúc Xích</td><td class="px-4 py-3 text-right font-semibold">27.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Tôm Surimi</td><td class="px-4 py-3 text-right font-semibold">30.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Thập Cẩm</td><td class="px-4 py-3 text-right font-semibold">32.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Trứng Cút</td><td class="px-4 py-3 text-right font-semibold">27.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Mực Xoắn</td><td class="px-4 py-3 text-right font-semibold">30.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Bò Viên</td><td class="px-4 py-3 text-right font-semibold">27.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Tôm Viên</td><td class="px-4 py-3 text-right font-semibold">27.000đ</td></tr>
+                <tr><td class="px-4 py-3">Mì Trộn Rau Củ</td><td class="px-4 py-3 text-right font-semibold">25.000đ</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Bánh tráng -->
+      <section id="banh-trang" class="space-y-3">
+        <div class="glass rounded-2xl p-4 sm:p-6">
+          <header class="flex items-end justify-between gap-3 mb-4">
+            <h2 class="text-lg sm:text-2xl font-bold">🍘 Bánh tráng</h2>
+          </header>
+          <div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-100/80 dark:bg-slate-900/60">
+                <tr>
+                  <th class="text-left px-4 py-3">Tên món</th>
+                  <th class="text-right px-4 py-3">Giá</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200/80 dark:divide-slate-800/80">
+                <tr><td class="px-4 py-3">Bánh tráng trộn</td><td class="px-4 py-3 text-right font-semibold">25.000đ</td></tr>
+                <tr><td class="px-4 py-3">Bánh tráng nướng</td><td class="px-4 py-3 text-right font-semibold">25.000đ</td></tr>
+                <tr><td class="px-4 py-3">Bánh tráng cuốn</td><td class="px-4 py-3 text-right font-semibold">25.000đ</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Mì thêm -->
+      <section id="mi-them" class="space-y-3">
+        <div class="glass rounded-2xl p-4 sm:p-6">
+          <header class="flex items-end justify-between gap-3 mb-4">
+            <h2 class="text-lg sm:text-2xl font-bold">🍜 Mì thêm</h2>
+          </header>
+          <ul class="grid sm:grid-cols-2 gap-3 text-sm">
+            <li class="flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-800 px-4 py-3 bg-white/40 dark:bg-slate-900/40">
+              <span>Mì Tôm</span><span class="font-semibold">+5.000đ</span>
+            </li>
+            <li class="flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-800 px-4 py-3 bg-white/40 dark:bg-slate-900/40">
+              <span>Mì Indomie</span><span class="font-semibold">+7.000đ</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section: Combo Ưu Đãi -->
+      <section id="combo-mi" class="space-y-3">
+        <div class="glass rounded-2xl p-4 sm:p-6">
+          <header class="flex items-end justify-between gap-3 mb-4">
+            <h2 class="text-lg sm:text-2xl font-bold">🥢 Combo Ưu Đãi</h2>
+            <span class="text-xs px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-semibold">Tiết kiệm</span>
+          </header>
+          <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+            <table class="w-full text-xs sm:text-sm">
+              <thead class="bg-slate-100/80 dark:bg-slate-900/60">
+                <tr>
+                  <th class="px-3 sm:px-4 py-3 text-left">Mã</th>
+                  <th class="px-3 sm:px-4 py-3 text-left">Tên Combo</th>
+                  <th class="px-3 sm:px-4 py-3 text-left min-w-[260px]">Nội dung</th>
+                  <th class="px-3 sm:px-4 py-3 text-right">Giá</th>
+                  <th class="px-3 sm:px-4 py-3 text-left">Ghi chú</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200/80 dark:divide-slate-800/80">
+                <tr><td class="px-3 sm:px-4 py-3">CB-SOLO39</td><td class="px-3 sm:px-4 py-3">Solo 39k</td><td class="px-3 sm:px-4 py-3">1 Mì Trộn Bò Viên + 1 Trà chanh</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">39.000đ</td><td class="px-3 sm:px-4 py-3">Chưa gồm phụ phí chọn mì</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-SOLO45</td><td class="px-3 sm:px-4 py-3">Solo+ 45k</td><td class="px-3 sm:px-4 py-3">1 Mì Trộn Mực Xoắn + 1 Trà tắc + 1 Tôm Surimi x2</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">45.000đ</td><td class="px-3 sm:px-4 py-3">Chưa gồm phụ phí chọn mì</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-PRO55</td><td class="px-3 sm:px-4 py-3">Protein 55k</td><td class="px-3 sm:px-4 py-3">1 Mì Trộn Full Topping + 1 Trà chanh</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">55.000đ</td><td class="px-3 sm:px-4 py-3">Tiết kiệm ~8k, chưa gồm phụ phí mì</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-INDO69</td><td class="px-3 sm:px-4 py-3">Indomie Premium 69k</td><td class="px-3 sm:px-4 py-3">1 Mì Trộn Full Topping (Indomie đã gồm +7k) + 1 Trà tắc</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">69.000đ</td><td class="px-3 sm:px-4 py-3">Đã bao gồm phụ phí Indomie</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-DUO99</td><td class="px-3 sm:px-4 py-3">Combo 2 Người 99k</td><td class="px-3 sm:px-4 py-3">2 Mì ≤30k + 2 Trà chanh/tắc + 1 Topping 12k</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">99.000đ</td><td class="px-3 sm:px-4 py-3">Chưa gồm phụ phí chọn mì</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-FAM179</td><td class="px-3 sm:px-4 py-3">Gia Đình 179k</td><td class="px-3 sm:px-4 py-3">4 Mì ≤30k + 4 Trà chanh/tắc + 2 Topping 12k</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">179.000đ</td><td class="px-3 sm:px-4 py-3">Chưa gồm phụ phí chọn mì</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-VEG45</td><td class="px-3 sm:px-4 py-3">Rau Củ 45k</td><td class="px-3 sm:px-4 py-3">1 Mì Rau Củ + 1 Trứng ốp la + 1 Trà tắc</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">45.000đ</td><td class="px-3 sm:px-4 py-3">Chưa gồm phụ phí chọn mì</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-TOP15</td><td class="px-3 sm:px-4 py-3">2 Topping 15k</td><td class="px-3 sm:px-4 py-3">Chọn 2 topping (tối đa 1 loại 12k)</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">15.000đ</td><td class="px-3 sm:px-4 py-3">Áp dụng cho topping 6k, 7k và tối đa 1 loại 12k</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-TOP25</td><td class="px-3 sm:px-4 py-3">3 Topping 25k</td><td class="px-3 sm:px-4 py-3">Chọn 3 topping (tối đa 2 loại 12k)</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">25.000đ</td><td class="px-3 sm:px-4 py-3">Tiết kiệm hơn khi chọn topping 12k</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Combo Bánh tráng + Nước -->
+      <section id="combo-banhnuoc" class="space-y-3">
+        <div class="glass rounded-2xl p-4 sm:p-6">
+          <header class="flex items-end justify-between gap-3 mb-4">
+            <h2 class="text-lg sm:text-2xl font-bold">🌯🥤 Combo Bánh tráng + Nước</h2>
+          </header>
+          <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+            <table class="w-full text-xs sm:text-sm">
+              <thead class="bg-slate-100/80 dark:bg-slate-900/60">
+                <tr>
+                  <th class="px-3 sm:px-4 py-3 text-left">Mã</th>
+                  <th class="px-3 sm:px-4 py-3 text-left">Tên combo</th>
+                  <th class="px-3 sm:px-4 py-3 text-left min-w-[260px]">Nội dung</th>
+                  <th class="px-3 sm:px-4 py-3 text-right">Giá</th>
+                  <th class="px-3 sm:px-4 py-3 text-left">Ghi chú</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200/80 dark:divide-slate-800/80">
+                <tr><td class="px-3 sm:px-4 py-3">CB-BTN39</td><td class="px-3 sm:px-4 py-3">Chill 39k</td><td class="px-3 sm:px-4 py-3">1 Bánh tráng (trộn/nướng/cuốn) + 1 Nước (trà chanh/trà tắc)</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">39.000đ</td><td class="px-3 sm:px-4 py-3">Giảm 1k so với lẻ</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-BTN75</td><td class="px-3 sm:px-4 py-3">Duo 75k</td><td class="px-3 sm:px-4 py-3">2 Bánh tráng + 2 Nước</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">75.000đ</td><td class="px-3 sm:px-4 py-3">Giảm 5k so với lẻ</td></tr>
+                <tr><td class="px-3 sm:px-4 py-3">CB-BTN110</td><td class="px-3 sm:px-4 py-3">Party 110k</td><td class="px-3 sm:px-4 py-3">3 Bánh tráng + 3 Nước</td><td class="px-3 sm:px-4 py-3 text-right font-semibold">110.000đ</td><td class="px-3 sm:px-4 py-3">Giảm 10k so với lẻ</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer note -->
+      <section class="text-xs text-slate-500 dark:text-slate-400 pb-8">
+        <p>* Giá có thể thay đổi theo thời điểm. Vui lòng hỏi nhân viên để biết giá mới nhất.</p>
+      </section>
+    </main>
+
+    <!-- Footer Dock -->
+    <footer class="no-print lg:hidden fixed bottom-0 inset-x-0 z-40 pb-safe px-4">
+      <div class="glass rounded-2xl h-[64px] grid grid-cols-4 items-center px-2">
+        <a href="#mi-tron" class="flex flex-col items-center text-xs font-medium">
+          <span class="i">🍜</span><span>Mì trộn</span>
+        </a>
+        <a href="#banh-trang" class="flex flex-col items-center text-xs font-medium">
+          <span class="i">🍘</span><span>Bánh tráng</span>
+        </a>
+        <a href="#combo-mi" class="flex flex-col items-center text-xs font-medium">
+          <span class="i">🥢</span><span>Combo</span>
+        </a>
+        <a href="#mi-them" class="flex flex-col items-center text-xs font-medium">
+          <span class="i">🍜</span><span>Mì thêm</span>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle (persist to localStorage)
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const printBtn = document.getElementById('printBtn');
+    const toTopBtn = document.getElementById('toTop');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      root.classList.add('dark');
+    }
+    themeBtn?.addEventListener('click', () => {
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+    printBtn?.addEventListener('click', () => window.print());
+    toTopBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
